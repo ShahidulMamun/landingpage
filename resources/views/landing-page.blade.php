@@ -193,37 +193,35 @@
 
 <!-- ===== WHY CHOOSE US ===== -->
 <section class="sk-section" id="why">
-  <div class="row align-items-center g-5">
-    <div class="container">
-      <div class="row g-4">
-        <div class="col-lg-5" data-reveal>
-          <span class="sk-eyebrow">কেন ShopKori</span>
-          <h2 class="mb-4">কেনাকাটা যেন হয় বিশ্বস্ত অভিজ্ঞতা</h2>
-          <p class="text-muted">আমরা জানি অনলাইন শপিংয়ে সবচেয়ে বড় চিন্তা— প্রোডাক্ট আসল কিনা, আর সময়মতো
-          পাবেন কিনা। তাই প্রতিটি ধাপে আমরা রেখেছি স্বচ্ছতা আর নিশ্চয়তা।</p>
-        </div>
-        <div class="col-lg-7">
-          <div class="row g-4">
-            @php
-              $features = [
-                ['icon' => 'bi-patch-check', 'title' => 'ভেরিফাইড সেলার', 'desc' => 'প্রতিটি সেলার আগে যাচাই করা হয়'],
-                ['icon' => 'bi-lightning-charge', 'title' => 'ফাস্ট প্রসেসিং', 'desc' => 'অর্ডারের ২৪ ঘণ্টার মধ্যে শিপমেন্ট'],
-                ['icon' => 'bi-headset', 'title' => '২৪/৭ সাপোর্ট', 'desc' => 'যেকোনো সময় লাইভ চ্যাটে সাহায্য'],
-                ['icon' => 'bi-wallet2', 'title' => 'সহজ পেমেন্ট', 'desc' => 'bKash, Nagad, কার্ড বা COD'],
-              ];
-            @endphp
-            @foreach($features as $f)
-            <div class="col-sm-6" data-reveal>
-              <div class="sk-feature-item">
-                <i class="bi {{ $f['icon'] }}"></i>
-                <div>
-                  <h6>{{ $f['title'] }}</h6>
-                  <p>{{ $f['desc'] }}</p>
-                </div>
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5" data-reveal>
+        <span class="sk-eyebrow">কেন ShopKori</span>
+        <h2 class="mb-4">কেনাকাটা যেন হয় বিশ্বস্ত অভিজ্ঞতা</h2>
+        <p class="text-muted">আমরা জানি অনলাইন শপিংয়ে সবচেয়ে বড় চিন্তা— প্রোডাক্ট আসল কিনা, আর সময়মতো
+        পাবেন কিনা। তাই প্রতিটি ধাপে আমরা রেখেছি স্বচ্ছতা আর নিশ্চয়তা।</p>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-4">
+          @php
+            $features = [
+              ['icon' => 'bi-patch-check', 'title' => 'ভেরিফাইড সেলার', 'desc' => 'প্রতিটি সেলার আগে যাচাই করা হয়'],
+              ['icon' => 'bi-lightning-charge', 'title' => 'ফাস্ট প্রসেসিং', 'desc' => 'অর্ডারের ২৪ ঘণ্টার মধ্যে শিপমেন্ট'],
+              ['icon' => 'bi-headset', 'title' => '২৪/৭ সাপোর্ট', 'desc' => 'যেকোনো সময় লাইভ চ্যাটে সাহায্য'],
+              ['icon' => 'bi-wallet2', 'title' => 'সহজ পেমেন্ট', 'desc' => 'bKash, Nagad, কার্ড বা COD'],
+            ];
+          @endphp
+          @foreach($features as $f)
+          <div class="col-sm-6" data-reveal>
+            <div class="sk-feature-item">
+              <i class="bi {{ $f['icon'] }}"></i>
+              <div>
+                <h6>{{ $f['title'] }}</h6>
+                <p>{{ $f['desc'] }}</p>
               </div>
             </div>
-            @endforeach
           </div>
+          @endforeach
         </div>
       </div>
     </div>
