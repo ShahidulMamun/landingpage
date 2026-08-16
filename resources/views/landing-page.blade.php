@@ -324,6 +324,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="{{ asset('js/landing.js') }}"></script>
+<script src="{{ asset('js/landing.page.js') }}"></script>
 </body>
 </html>
