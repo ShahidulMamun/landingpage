@@ -25,8 +25,7 @@ class OrderController extends Controller
             'total_price' => $validated['unit_price'] * $validated['quantity'],
             'status'      => 'pending',
         ]);
-
-        // এখানে চাইলে SMS/notification পাঠাতে পারো, যেমন:
+        
         // Notification::route('...')->notify(new OrderPlaced($order));
 
         return response()->json([

@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ShopKori — একটাই ঠিকানা, সব কেনাকাটার</title>
 <meta name="description" content="সেরা দামে অথেনটিক প্রোডাক্ট, ক্যাশ অন ডেলিভারি সহ সারা বাংলাদেশে ফাস্ট ডেলিভারি।">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Bootstrap 5 -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -29,6 +30,7 @@
       <ul class="navbar-nav mx-auto gap-lg-4">
         <li class="nav-item"><a class="nav-link" href="#categories">ক্যাটাগরি</a></li>
         <li class="nav-item"><a class="nav-link" href="#products">প্রোডাক্টস</a></li>
+        <li class="nav-item"><a class="nav-link" href="#how-to-order">অর্ডার প্রসেস</a></li>
         <li class="nav-item"><a class="nav-link" href="#why">কেন আমরা</a></li>
         <li class="nav-item"><a class="nav-link" href="#reviews">রিভিউ</a></li>
       </ul>
@@ -155,31 +157,42 @@
     <div class="row g-4">
       @php
         $products = [
-          ['name' => 'ওয়্যারলেস ইয়ারবাডস', 'price' => '১,৪৯৯', 'old' => '২,২০০', 'img' => 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=500&auto=format&fit=crop', 'badge' => '৩২% ছাড়'],
-          ['name' => 'মিনিমাল ব্যাকপ্যাক', 'price' => '২,১৫০', 'old' => null, 'img' => 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=500&auto=format&fit=crop', 'badge' => 'নতুন'],
-          ['name' => 'স্মার্ট ওয়াচ প্রো', 'price' => '৩,৯৯০', 'old' => '৫,৫০০', 'img' => 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop', 'badge' => '২৭% ছাড়'],
-          ['name' => 'ক্যাজুয়াল স্নিকার্স', 'price' => '২,৮৯০', 'old' => null, 'img' => 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500&auto=format&fit=crop', 'badge' => 'জনপ্রিয়'],
+          ['id' => 1, 'name' => 'ওয়্যারলেস ইয়ারবাডস', 'price' => 1499, 'old' => 2200, 'img' => 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=500&auto=format&fit=crop', 'badge' => '৩২% ছাড়', 'desc' => 'ব্লুটুথ ৫.৩, ৩০ ঘণ্টা ব্যাটারি ব্যাকআপ, IPX৫ ওয়াটার রেজিস্ট্যান্ট। ১ বছর রিপ্লেসমেন্ট ওয়ারেন্টি সহ।'],
+          ['id' => 2, 'name' => 'মিনিমাল ব্যাকপ্যাক', 'price' => 2150, 'old' => null, 'img' => 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=500&auto=format&fit=crop', 'badge' => 'নতুন', 'desc' => 'ওয়াটারপ্রুফ ফেব্রিক, ১৫.৬" ল্যাপটপ কমপার্টমেন্ট, USB চার্জিং পোর্ট সহ প্রিমিয়াম ফিনিশ।'],
+          ['id' => 3, 'name' => 'স্মার্ট ওয়াচ প্রো', 'price' => 3990, 'old' => 5500, 'img' => 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop', 'badge' => '২৭% ছাড়', 'desc' => 'হার্ট রেট ও SpO2 মনিটর, ৭ দিন ব্যাটারি লাইফ, ওয়াটার রেজিস্ট্যান্ট, Android/iOS সাপোর্টেড।'],
+          ['id' => 4, 'name' => 'ক্যাজুয়াল স্নিকার্স', 'price' => 2890, 'old' => null, 'img' => 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500&auto=format&fit=crop', 'badge' => 'জনপ্রিয়', 'desc' => 'ব্রিদেবল মেশ আপার, কুশনড সোল, সব সাইজে (৩৯-৪৪) স্টক আছে।'],
         ];
       @endphp
       @foreach($products as $p)
       <div class="col-6 col-lg-3" data-reveal data-reveal-delay="{{ $loop->index * 100 }}">
-        <div class="sk-product-card">
-          <div class="sk-product-img">
+        <div class="sk-product-card"
+             data-id="{{ $p['id'] }}"
+             data-name="{{ $p['name'] }}"
+             data-price="{{ $p['price'] }}"
+             data-old="{{ $p['old'] }}"
+             data-img="{{ $p['img'] }}"
+             data-desc="{{ $p['desc'] }}">
+          <div class="sk-product-img sk-open-details" role="button" tabindex="0">
             <img src="{{ $p['img'] }}" alt="{{ $p['name'] }}">
             <span class="sk-badge">{{ $p['badge'] }}</span>
-            <button class="sk-wishlist"><i class="bi bi-heart"></i></button>
+            <button class="sk-wishlist" onclick="event.stopPropagation()"><i class="bi bi-heart"></i></button>
           </div>
           <div class="sk-product-body">
-            <h6>{{ $p['name'] }}</h6>
+            <h6 class="sk-open-details" role="button" tabindex="0">{{ $p['name'] }}</h6>
             <div class="sk-product-price">
-              <span class="sk-price-new">৳{{ $p['price'] }}</span>
+              <span class="sk-price-new">৳{{ number_format($p['price']) }}</span>
               @if($p['old'])
-                <span class="sk-price-old">৳{{ $p['old'] }}</span>
+                <span class="sk-price-old">৳{{ number_format($p['old']) }}</span>
               @endif
             </div>
-            <button class="btn sk-btn-cart w-100 mt-2">
-              <i class="bi bi-bag-plus"></i> কার্টে যোগ করুন
-            </button>
+            <div class="d-flex gap-2 mt-2">
+              <button class="btn sk-btn-cart sk-open-details flex-fill">
+                <i class="bi bi-eye"></i> বিস্তারিত
+              </button>
+              <button class="btn sk-btn-primary sk-open-order flex-fill">
+                <i class="bi bi-lightning-charge-fill"></i> অর্ডার করুন
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -187,6 +200,41 @@
     </div>
     <div class="text-center mt-5" data-reveal>
       <a href="#" class="btn sk-btn-ghost btn-lg">সব প্রোডাক্ট দেখুন</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW TO ORDER ===== -->
+<section class="sk-section" id="how-to-order">
+  <div class="container">
+    <div class="sk-section-head" data-reveal>
+      <span class="sk-eyebrow">সহজ ৪ ধাপ</span>
+      <h2>মাত্র কয়েক ক্লিকে অর্ডার করুন</h2>
+    </div>
+    <div class="row g-4">
+      @php
+        $steps = [
+          ['num' => '০১', 'icon' => 'bi-bag-heart', 'title' => 'প্রোডাক্ট বাছাই করুন', 'desc' => 'পছন্দের প্রোডাক্টে ক্লিক করে বিস্তারিত দেখুন'],
+          ['num' => '০২', 'icon' => 'bi-pencil-square', 'title' => 'ফর্ম পূরণ করুন', 'desc' => 'নাম, ফোন নম্বর ও ঠিকানা দিন — মাত্র ৩০ সেকেন্ড'],
+          ['num' => '০৩', 'icon' => 'bi-telephone-outbound', 'title' => 'কনফার্মেশন কল', 'desc' => 'আমাদের টিম কল করে অর্ডার নিশ্চিত করবে'],
+          ['num' => '০৪', 'icon' => 'bi-box-seam', 'title' => 'হাতে পেয়ে টাকা দিন', 'desc' => 'প্রোডাক্ট হাতে পেয়ে ক্যাশ অন ডেলিভারিতে পেমেন্ট'],
+        ];
+      @endphp
+      @foreach($steps as $s)
+      <div class="col-6 col-lg-3" data-reveal data-reveal-delay="{{ $loop->index * 100 }}">
+        <div class="sk-step-card">
+          <span class="sk-step-num">{{ $s['num'] }}</span>
+          <i class="bi {{ $s['icon'] }}"></i>
+          <h6>{{ $s['title'] }}</h6>
+          <p>{{ $s['desc'] }}</p>
+        </div>
+      </div>
+      @endforeach
+    </div>
+    <div class="text-center mt-4" data-reveal>
+      <a href="#products" class="btn sk-btn-primary btn-lg">
+        <i class="bi bi-lightning-charge-fill"></i> এখনই অর্ডার শুরু করুন
+      </a>
     </div>
   </div>
 </section>
@@ -321,7 +369,103 @@
   </div>
 </footer>
 
+<!-- ===== PRODUCT DETAILS + QUICK ORDER MODAL ===== -->
+<div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content sk-modal">
+
+      <!-- Success state -->
+      <div class="sk-order-success d-none text-center p-5">
+        <i class="bi bi-check-circle-fill"></i>
+        <h4 class="mt-3">অর্ডার সফলভাবে সাবমিট হয়েছে!</h4>
+        <p class="text-muted">আমাদের টিম শীঘ্রই আপনার দেওয়া নম্বরে কল করে অর্ডার নিশ্চিত করবে।</p>
+        <button type="button" class="btn sk-btn-primary mt-2" data-bs-dismiss="modal">ঠিক আছে</button>
+      </div>
+
+      <!-- Main content -->
+      <div class="sk-order-body">
+        <button type="button" class="btn-close sk-modal-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="row g-0">
+
+          <!-- Product summary -->
+          <div class="col-md-5 sk-modal-product">
+            <img id="omProductImg" src="" alt="">
+            <div class="sk-modal-product-info">
+              <h5 id="omProductName">—</h5>
+              <p id="omProductDesc" class="text-muted small"></p>
+              <div class="sk-product-price mb-3">
+                <span class="sk-price-new" id="omProductPrice">৳0</span>
+                <span class="sk-price-old" id="omProductOld"></span>
+              </div>
+              <div class="sk-qty-stepper">
+                <button type="button" id="omQtyMinus"><i class="bi bi-dash"></i></button>
+                <span id="omQtyValue">1</span>
+                <button type="button" id="omQtyPlus"><i class="bi bi-plus"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick order form -->
+          <div class="col-md-7">
+            <form id="omOrderForm" class="sk-order-form">
+              <input type="hidden" name="product_id" id="omProductId">
+              <input type="hidden" name="product_name" id="omProductNameField">
+              <input type="hidden" name="unit_price" id="omUnitPrice">
+              <input type="hidden" name="quantity" id="omQtyField" value="1">
+              <span class="sk-eyebrow mb-2">দ্রুত অর্ডার — মাত্র ৩০ সেকেন্ড</span>
+              <div class="mb-3">
+                <label class="form-label">পুরো নাম *</label>
+                <input type="text" name="customer_name" class="form-control" required placeholder="আপনার নাম লিখুন">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">মোবাইল নম্বর *</label>
+                <input type="tel" name="phone" class="form-control" required pattern="^01[3-9][0-9]{8}$" placeholder="01XXXXXXXXX">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">সম্পূর্ণ ঠিকানা *</label>
+                <textarea name="address" class="form-control" rows="2" required placeholder="বাসা/রোড, থানা, জেলা"></textarea>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">পেমেন্ট মেথড</label>
+                <div class="sk-payment-options">
+                  <label class="sk-payment-radio">
+                    <input type="radio" name="payment_method" value="cod" checked>
+                    <span><i class="bi bi-cash-coin"></i> ক্যাশ অন ডেলিভারি</span>
+                  </label>
+                  <label class="sk-payment-radio">
+                    <input type="radio" name="payment_method" value="bkash">
+                    <span><i class="bi bi-wallet2"></i> bKash অ্যাডভান্স</span>
+                  </label>
+                </div>
+              </div>
+              <div class="sk-order-error alert alert-danger py-2 d-none"></div>
+              <div class="sk-order-total">
+                <span>সর্বমোট</span>
+                <strong id="omTotalPrice">৳0</strong>
+              </div>
+              <button type="submit" class="btn sk-btn-primary w-100 btn-lg mt-3">
+                <span class="sk-btn-text"><i class="bi bi-check2-circle"></i> অর্ডার কনফার্ম করুন</span>
+                <span class="sk-btn-spinner d-none">
+                  <span class="spinner-border spinner-border-sm"></span> প্রসেসিং...
+                </span>
+              </button>
+              <p class="sk-order-note">* কোনো অগ্রিম টাকা লাগবে না, শুধু ডেলিভারির সময় পেমেন্ট করুন (COD)</p>
+            </form>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // landing.js একটা static ফাইল — Blade route() ওখানে কাজ করে না,
+  // তাই route URL টা এখান থেকে global variable এ পাস করা হচ্ছে
+  window.SK_ORDER_URL = "{{ route('order.store') }}";
+</script>
 <script src="{{ asset('js/landing.page.js') }}"></script>
 </body>
 </html>
