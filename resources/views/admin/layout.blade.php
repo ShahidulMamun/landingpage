@@ -29,11 +29,15 @@
     .admin-content{ margin-left:0; padding:1.25rem; }
   }
 </style>
+@yield('extra_head')
 </head>
 <body>
 
 <div class="admin-sidebar">
-  <a href="{{ route('admin.products.index') }}" class="brand">Shop<span style="color:#FFC145">Kori</span> Admin</a>
+  <a href="{{ route('admin.dashboard') }}" class="brand">Shop<span style="color:#FFC145">Kori</span> Admin</a>
+  <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+    <i class="bi bi-speedometer2"></i> ড্যাশবোর্ড
+  </a>
   <a href="{{ route('admin.categories.index') }}" class="{{ request()->routeIs('admin.categories.*') ? 'active' : '' }}">
     <i class="bi bi-tags"></i> ক্যাটাগরি
   </a>
