@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\AdminLoginController;
 
 
 
@@ -13,8 +14,13 @@ Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 
+Route::middleware('admin.guest')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminLoginController::class, 'create'])->name('login');
+    Route::post('/login', [AdminLoginController::class, 'store'])->name('login.store');
+});
 
-Route::prefix('admin')->name('admin.')->group(function () {
+
+Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
