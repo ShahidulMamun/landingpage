@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CreateAdminCommand extends Command
 {
-    protected $signature = 'admin:create';
+    protected $signature = 'create:admin';
     protected $description = 'একটা নতুন অ্যাডমিন অ্যাকাউন্ট তৈরি করে (সিকিউর CLI পদ্ধতি)';
 
     public function handle(): int
