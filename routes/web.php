@@ -13,15 +13,20 @@ use App\Http\Controllers\Admin\AdminLoginController;
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
-
+//== Auth Route == 
 Route::middleware('admin.guest')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/login', [AdminLoginController::class, 'create'])->name('login');
     Route::post('/login', [AdminLoginController::class, 'store'])->name('login.store');
 });
 
-
+//== Admin Route ==
 Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
 });
+
+//== Logout Route == 
+Route::post('/admin/logout', [AdminLoginController::class, 'destroy'])
+    ->middleware('admin.auth')
+    ->name('admin.logout');
