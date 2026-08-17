@@ -20,7 +20,7 @@ Route::middleware('admin.guest')->prefix('admin')->name('admin.')->group(functio
 });
 
 //== Admin Route ==
-Route::middleware('auth.admin')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
