@@ -6,7 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-     protected $fillable = [
+    const STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
+    const PAYMENT_STATUSES = ['unpaid', 'paid', 'refunded'];
+    
+    protected $fillable = [
         'product_id',
         'product_name',
         'unit_price',
@@ -19,4 +22,5 @@ class Order extends Model
         'payment_status',
         'status',
     ];
+
 }
