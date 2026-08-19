@@ -16,6 +16,7 @@ class Order extends Model
         'phone',
         'address',
         'payment_method',
+        'payment_status',
         'status',
     ];
 }
