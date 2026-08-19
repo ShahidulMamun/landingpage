@@ -8,9 +8,11 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\OrderManageController;
+use App\Http\Controller\FaqController;
 
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 
 //== Auth Route == 
