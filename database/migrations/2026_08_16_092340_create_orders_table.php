@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone', 20);
             $table->text('address');
             $table->enum('payment_method', ['cod', 'bkash'])->default('cod');
+            $table->enum('payment_status', ['unpaid', 'paid', 'refunded'])->default('unpaid');
             $table->enum('status', ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])->default('pending');
             $table->timestamps();
             $table->index('phone');
