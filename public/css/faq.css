@@ -1,0 +1,142 @@
+/* ==========================================================================
+   FAQ page — uses the same design tokens (--sk-teal, --sk-coral, etc.)
+   already defined in landing.page.css. This file only adds FAQ-specific rules.
+   ========================================================================== */
+
+.faq-hero {
+    padding: 5rem 0 3rem;
+    background: linear-gradient(180deg, #fbf0ec, var(--sk-ivory));
+    text-align: center;
+}
+.faq-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    margin: 0.75rem 0 0.5rem;
+    color: var(--sk-charcoal);
+}
+.faq-sub {
+    color: var(--sk-gray);
+    max-width: 480px;
+    margin: 0 auto 2rem;
+}
+
+.faq-search {
+    max-width: 520px;
+    margin: 0 auto;
+    position: relative;
+}
+.faq-search i {
+    position: absolute;
+    left: 1.1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--sk-gray);
+}
+.faq-search input {
+    width: 100%;
+    border: none;
+    border-radius: 100px;
+    padding: 0.9rem 1.25rem 0.9rem 2.75rem;
+    box-shadow: 0 10px 30px rgba(15, 82, 87, 0.12);
+    font-size: 0.95rem;
+}
+.faq-search input:focus {
+    outline: none;
+    box-shadow:
+        0 10px 30px rgba(15, 82, 87, 0.18),
+        0 0 0 3px rgba(255, 193, 69, 0.4);
+}
+
+.faq-jump {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    justify-content: center;
+}
+.faq-jump-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #fff;
+    border: 1px solid rgba(15, 82, 87, 0.15);
+    border-radius: 100px;
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+    color: var(--sk-charcoal);
+    font-weight: 500;
+}
+.faq-jump-item:hover {
+    background: var(--sk-teal);
+    color: #fff;
+    border-color: var(--sk-teal);
+}
+
+.faq-group {
+    margin-bottom: 2.5rem;
+    scroll-margin-top: 90px;
+}
+.faq-group-title {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+    color: var(--sk-teal-dark);
+}
+
+.sk-faq-accordion .accordion-item {
+    border: none;
+    border-radius: 14px !important;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+    box-shadow: 0 4px 16px rgba(15, 82, 87, 0.06);
+}
+.sk-faq-accordion .accordion-button {
+    font-weight: 600;
+    color: var(--sk-charcoal);
+    padding: 1.1rem 1.4rem;
+    background: #fff;
+}
+.sk-faq-accordion .accordion-button:not(.collapsed) {
+    background: rgba(15, 82, 87, 0.06);
+    color: var(--sk-teal-dark);
+    box-shadow: none;
+}
+.sk-faq-accordion .accordion-button:focus {
+    box-shadow: 0 0 0 3px rgba(255, 193, 69, 0.35);
+}
+.sk-faq-accordion .accordion-body {
+    padding: 0 1.4rem 1.25rem;
+    color: var(--sk-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.faq-help-card {
+    background: var(--sk-charcoal);
+    border-radius: var(--sk-radius);
+    padding: 3rem 1.5rem;
+    color: #fff;
+}
+.faq-help-card i {
+    font-size: 2rem;
+    color: var(--sk-gold);
+}
+.faq-help-card p {
+    color: rgba(255, 255, 255, 0.7);
+}
+.faq-help-card .btn {
+    margin: 0.3rem;
+}
+
+@media (max-width: 575.98px) {
+    .faq-hero {
+        padding: 3.5rem 0 2rem;
+    }
+    .faq-help-card {
+        padding: 2.25rem 1.25rem;
+    }
+}
