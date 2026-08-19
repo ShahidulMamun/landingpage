@@ -7,7 +7,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
-
+use App\Http\Controllers\Admin\Auth\OrderManageController;
 
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
@@ -24,6 +24,7 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
+    Route::resource('orders', OrderManageController::class)->only(['index', 'show', 'update', 'destroy']);
 });
 
 //== Logout Route == 
