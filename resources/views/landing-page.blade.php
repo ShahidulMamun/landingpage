@@ -354,7 +354,7 @@
         <ul>
           <li><a href="#">রিটার্ন পলিসি</a></li>
           <li><a href="#">শিপিং তথ্য</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="{{route('faq')}}">FAQ</a></li>
         </ul>
       </div>
       <div class="col-lg-4">

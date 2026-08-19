@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\OrderManageController;
-use App\Http\Controller\FaqController;
+use App\Http\Controllers\FaqController;
 
 
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
