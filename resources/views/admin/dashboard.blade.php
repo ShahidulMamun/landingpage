@@ -85,6 +85,43 @@
       </div>
     </div>
   </div>
+  <div class="col-6 col-lg-4">
+    <div class="stat-card {{ $stats['unpaid_amount'] > 0 ? 'stat-card--alert' : '' }}">
+      <div class="stat-icon" style="background:rgba(220,53,69,0.1);color:#dc3545">
+        <i class="bi bi-wallet2"></i>
+      </div>
+      <div>
+        <span class="stat-label">আনপেইড এমাউন্ট</span>
+        <strong class="stat-value">৳{{ number_format($stats['unpaid_amount']) }}</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Payment status breakdown -->
+<div class="admin-card mb-4">
+  <h6 class="mb-3">পেমেন্ট স্ট্যাটাস ওভারভিউ</h6>
+  @php
+    $totalPay = max(array_sum($paymentCounts), 1);
+  @endphp
+  <div class="pay-breakdown">
+    <div class="pay-bar">
+      <div class="pay-bar-seg" style="width:{{ $paymentCounts['unpaid'] / $totalPay * 100 }}%; background:#6c757d" title="Unpaid"></div>
+      <div class="pay-bar-seg" style="width:{{ $paymentCounts['paid'] / $totalPay * 100 }}%; background:#198754" title="Paid"></div>
+      <div class="pay-bar-seg" style="width:{{ $paymentCounts['refunded'] / $totalPay * 100 }}%; background:#dc3545" title="Refunded"></div>
+    </div>
+    <div class="pay-legend">
+      <a href="{{ route('admin.orders.index', ['payment_status' => 'unpaid']) }}" class="pay-legend-item">
+        <span class="dot" style="background:#6c757d"></span> Unpaid <strong>{{ $paymentCounts['unpaid'] }}</strong>
+      </a>
+      <a href="{{ route('admin.orders.index', ['payment_status' => 'paid']) }}" class="pay-legend-item">
+        <span class="dot" style="background:#198754"></span> Paid <strong>{{ $paymentCounts['paid'] }}</strong>
+      </a>
+      <a href="{{ route('admin.orders.index', ['payment_status' => 'refunded']) }}" class="pay-legend-item">
+        <span class="dot" style="background:#dc3545"></span> Refunded <strong>{{ $paymentCounts['refunded'] }}</strong>
+      </a>
+    </div>
+  </div>
 </div>
 
 <!-- Recent orders -->
@@ -110,7 +147,7 @@
       </thead>
       <tbody>
         @forelse($recentOrders as $order)
-        <tr>
+        <tr class="order-row" onclick="window.location='{{ route('admin.orders.show', $order) }}'" style="cursor:pointer">
           <td>#{{ $order->id }}</td>
           <td>{{ $order->product_name }}</td>
           <td>{{ $order->customer_name }}</td>
@@ -118,11 +155,11 @@
           <td>{{ $order->quantity }}</td>
           <td>৳{{ number_format($order->total_price) }}</td>
           <td>
-            @if($order->payment_method === 'cod')
-              <span class="badge bg-light text-dark border">COD</span>
-            @else
-              <span class="badge bg-light text-dark border">bKash</span>
-            @endif
+            @php
+              $payColors = ['unpaid' => 'secondary', 'paid' => 'success', 'refunded' => 'danger'];
+            @endphp
+            <span class="badge bg-light text-dark border">{{ strtoupper($order->payment_method) }}</span>
+            <span class="badge bg-{{ $payColors[$order->payment_status] ?? 'secondary' }}">{{ $order->payment_status }}</span>
           </td>
           <td>
             @php
@@ -163,5 +200,19 @@
   }
   .stat-label{ display:block; font-size:.78rem; color:#6c757d; }
   .stat-value{ font-size:1.3rem; font-weight:700; color:#1A1A2E; }
+  .pay-bar{
+    display:flex; width:100%; height:14px; border-radius:100px;
+    overflow:hidden; background:#eee; margin-bottom:1rem;
+  }
+  .pay-bar-seg{ height:100%; }
+  .pay-legend{ display:flex; gap:1.5rem; flex-wrap:wrap; }
+  .pay-legend-item{
+    display:flex; align-items:center; gap:.4rem;
+    font-size:.85rem; color:#1A1A2E;
+  }
+  .pay-legend-item strong{ margin-left:.15rem; }
+  .pay-legend-item .dot{
+    width:10px; height:10px; border-radius:50%; display:inline-block;
+  }
 </style>
 @endsection
