@@ -59,6 +59,9 @@
   <a href="{{ route('admin.products.index') }}" class="{{ request()->routeIs('admin.products.*') ? 'active' : '' }}">
     <i class="bi bi-box-seam"></i> প্রোডাক্ট
   </a>
+  <a href="{{ route('admin.orders.index') }}" class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
+    <i class="bi bi-receipt"></i> অর্ডার
+  </a>
   <a href="{{ route('landing') }}" target="_blank">
     <i class="bi bi-box-arrow-up-right"></i> সাইট দেখুন
   </a>
