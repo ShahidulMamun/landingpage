@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\OrderManageController;
+use App\Http\Controllers\Admin\FaqManageController  as AdminFaqController;
 use App\Http\Controllers\FaqController;
 
 //== Guest Route ==
@@ -27,6 +28,7 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::resource('categories', CategoryController::class);
     Route::resource('products', ProductController::class);
     Route::resource('orders', OrderManageController::class)->only(['index', 'show', 'update', 'destroy']);
+    Route::resource('faqs', AdminFaqController::class)->except(['show']);
 });
 
 //== Logout Route == 
