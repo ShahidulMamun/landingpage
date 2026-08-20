@@ -2,19 +2,25 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\FaqController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\OrderManageController;
 use App\Http\Controllers\Admin\FaqManageController  as AdminFaqController;
-use App\Http\Controllers\FaqController;
+
 
 //== Guest Route ==
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+// == Subscribe and Unsubscribe Route ==
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'store'])->name('newsletter.subscribe');
+Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])->name('newsletter.unsubscribe');
 
 //== Auth Route == 
 Route::middleware('admin.guest')->prefix('admin')->name('admin.')->group(function () {
