@@ -75,7 +75,7 @@
     box-shadow: 0 0 0 3px rgba(255, 193, 69, 0.35);
 }
 .sk-faq-accordion .accordion-body {
-    padding: 0 1.4rem 1.25rem;
+    padding: 1rem 1.4rem 1.25rem;
     color: var(--sk-gray);
     font-size: 0.95rem;
     line-height: 1.6;
