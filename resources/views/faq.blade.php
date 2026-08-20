@@ -55,56 +55,43 @@
   </div>
 </header>
 
-<!-- ===== FAQ GROUPS ===== -->
+<!-- ===== FAQ LIST ===== -->
 <section class="sk-section">
   <div class="container">
     <div class="row">
       <div class="col-lg-9 mx-auto">
-
-        <!-- Category quick-jump -->
-        <div class="faq-jump mb-5">
-          @foreach($faqGroups as $group)
-          <a href="#faq-group-{{ $loop->index }}" class="faq-jump-item">
-            <i class="bi {{ $group['icon'] }}"></i> {{ $group['title'] }}
-          </a>
-          @endforeach
-        </div>
 
         <div id="faqNoResults" class="text-center text-muted py-5 d-none">
           <i class="bi bi-search" style="font-size:2rem"></i>
           <p class="mt-2">কোনো মিল খুঁজে পাওয়া যায়নি। অন্য শব্দ দিয়ে খুঁজে দেখো।</p>
         </div>
 
-        @foreach($faqGroups as $group)
-        <div class="faq-group" id="faq-group-{{ $loop->index }}">
-          <h4 class="faq-group-title">
-            <i class="bi {{ $group['icon'] }}"></i> {{ $group['title'] }}
-          </h4>
+        @if($faqs->isEmpty())
+        <p class="text-center text-muted py-5">এখনো কোনো প্রশ্ন যোগ করা হয়নি।</p>
+        @endif
 
-          <div class="accordion sk-faq-accordion" id="faqAccordion{{ $loop->index }}">
-            @foreach($group['items'] as $i => $item)
-            <div class="accordion-item faq-item"
-                 data-question="{{ mb_strtolower($item['q']) }}"
-                 data-answer="{{ mb_strtolower($item['a']) }}">
-              <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#faqCollapse{{ $loop->parent->index }}-{{ $i }}">
-                  {{ $item['q'] }}
-                </button>
-              </h2>
-              <div id="faqCollapse{{ $loop->parent->index }}-{{ $i }}"
-                   class="accordion-collapse collapse"
-                   data-bs-parent="#faqAccordion{{ $loop->parent->index }}">
-                <div class="accordion-body">
-                  {{ $item['a'] }}
-                </div>
+        <div class="accordion sk-faq-accordion" id="faqAccordion">
+          @foreach($faqs as $item)
+          <div class="accordion-item faq-item"
+               data-question="{{ mb_strtolower($item->question) }}"
+               data-answer="{{ mb_strtolower($item->answer) }}">
+            <h2 class="accordion-header">
+              <button class="accordion-button collapsed" type="button"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#faqCollapse{{ $loop->index }}">
+                {{ $item->question }}
+              </button>
+            </h2>
+            <div id="faqCollapse{{ $loop->index }}"
+                 class="accordion-collapse collapse"
+                 data-bs-parent="#faqAccordion">
+              <div class="accordion-body">
+                {{ $item->answer }}
               </div>
             </div>
-            @endforeach
           </div>
+          @endforeach
         </div>
-        @endforeach
 
       </div>
     </div>
