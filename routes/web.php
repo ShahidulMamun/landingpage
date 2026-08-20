@@ -10,7 +10,7 @@ use App\Http\Controllers\Admin\Auth\AdminLoginController;
 use App\Http\Controllers\Admin\OrderManageController;
 use App\Http\Controllers\FaqController;
 
-
+//== Guest Route ==
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
