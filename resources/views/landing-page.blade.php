@@ -319,10 +319,11 @@
         <p>এক্সক্লুসিভ ডিসকাউন্ট আর নতুন প্রোডাক্ট লঞ্চের খবর সবার আগে পান।</p>
       </div>
       <div class="col-lg-5">
-        <form class="sk-newsletter-form">
-          <input type="email" placeholder="আপনার ইমেইল দিন" required>
-          <button type="submit" class="btn sk-btn-primary">সাবস্ক্রাইব</button>
-        </form>
+      <form class="sk-newsletter-form" id="skNewsletterForm">
+        <input type="email" name="email" placeholder="আপনার ইমেইল দিন" required>
+        <button type="submit" class="btn sk-btn-primary">সাবস্ক্রাইব</button>
+      </form>
+      <p class="sk-newsletter-msg small mt-2 mb-0 d-none"></p>
       </div>
     </div>
   </div>
@@ -465,6 +466,7 @@
   // landing.js একটা static ফাইল — Blade route() ওখানে কাজ করে না,
   // তাই route URL টা এখান থেকে global variable এ পাস করা হচ্ছে
   window.SK_ORDER_URL = "{{ route('order.store') }}";
+  window.SK_NEWSLETTER_URL = "{{ route('newsletter.subscribe') }}";
 </script>
 <script src="{{ asset('js/landing.page.js') }}"></script>
 </body>
