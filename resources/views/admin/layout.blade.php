@@ -62,6 +62,9 @@
   <a href="{{ route('admin.orders.index') }}" class="{{ request()->routeIs('admin.orders.*') ? 'active' : '' }}">
     <i class="bi bi-receipt"></i> অর্ডার
   </a>
+  <a href="{{ route('admin.faqs.index') }}" class="{{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">
+    <i class="bi bi-question-circle"></i> FAQ
+  </a>
   <a href="{{ route('landing') }}" target="_blank">
     <i class="bi bi-box-arrow-up-right"></i> সাইট দেখুন
   </a>
