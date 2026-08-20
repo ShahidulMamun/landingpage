@@ -48,43 +48,9 @@
         0 0 0 3px rgba(255, 193, 69, 0.4);
 }
 
-.faq-jump {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.6rem;
-    justify-content: center;
-}
-.faq-jump-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    background: #fff;
-    border: 1px solid rgba(15, 82, 87, 0.15);
-    border-radius: 100px;
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-    color: var(--sk-charcoal);
-    font-weight: 500;
-}
-.faq-jump-item:hover {
-    background: var(--sk-teal);
-    color: #fff;
-    border-color: var(--sk-teal);
-}
-
 .faq-group {
     margin-bottom: 2.5rem;
     scroll-margin-top: 90px;
-}
-.faq-group-title {
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 1.3rem;
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    margin-bottom: 1rem;
-    color: var(--sk-teal-dark);
 }
 
 .sk-faq-accordion .accordion-item {
