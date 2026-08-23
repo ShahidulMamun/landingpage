@@ -9,7 +9,7 @@
 <style>
   body{
     min-height:100vh; display:flex; align-items:center; justify-content:center;
-    background: linear-gradient(135deg,#0F5257,#0A3A3E);
+    background: linear-gradient(135deg,#1A1A2E,#1A1A2E);
     font-family:'Segoe UI',sans-serif;
   }
   .login-card{
@@ -19,9 +19,9 @@
   .login-logo{ text-align:center; font-weight:700; font-size:1.4rem; margin-bottom:.25rem; }
   .login-logo span{ color:#FF6B4A; }
   .login-sub{ text-align:center; color:#6c757d; font-size:.88rem; margin-bottom:1.75rem; }
-  .form-control:focus{ border-color:#0F5257; box-shadow:0 0 0 3px rgba(15,82,87,0.12); }
-  .btn-login{ background:#0F5257; color:#fff; }
-  .btn-login:hover{ background:#0A3A3E; color:#fff; }
+  .form-control:focus{ border-color:#1A1A2E; box-shadow:0 0 0 3px rgba(15,82,87,0.12); }
+  .btn-login{ background:#1A1A2E; color:#fff; }
+  .btn-login:hover{ background:#1A1A2E; color:#fff; }
 </style>
 </head>
 <body>
