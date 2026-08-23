@@ -6,7 +6,6 @@ deployment:
     - /bin/cp -R database /home/livejobs/landing.livejobsbd/
     - /bin/cp -R resources /home/livejobs/landing.livejobsbd/
     - /bin/cp -R routes /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R public /home/livejobs/landing.livejobsbd/
     - /bin/cp artisan /home/livejobs/landing.livejobsbd/
     - /bin/cp composer.json /home/livejobs/landing.livejobsbd/
     - /bin/cp composer.lock /home/livejobs/landing.livejobsbd/
@@ -15,3 +14,4 @@ deployment:
     - /bin/cp vite.config.js /home/livejobs/landing.livejobsbd/
     - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd/
     - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd/
+    - /bin/cp -R public/* /home/livejobs/landing.livejobsbd.com/
