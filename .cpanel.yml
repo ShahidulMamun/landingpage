@@ -11,7 +11,6 @@ deployment:
     - /bin/cp composer.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp composer.lock /home/livejobs/landing.livejobsbd.com/
     - /bin/cp package.json /home/livejobs/landing.livejobsbd.com/
-    - /bin/cp package-lock.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp vite.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd.com/
