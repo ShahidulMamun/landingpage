@@ -1,17 +1,18 @@
+---
 deployment:
   tasks:
-    - /bin/cp -R app /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R bootstrap /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R config /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R database /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R resources /home/livejobs/landing.livejobsbd/
-    - /bin/cp -R routes /home/livejobs/landing.livejobsbd/
-    - /bin/cp artisan /home/livejobs/landing.livejobsbd/
-    - /bin/cp composer.json /home/livejobs/landing.livejobsbd/
-    - /bin/cp composer.lock /home/livejobs/landing.livejobsbd/
-    - /bin/cp package.json /home/livejobs/landing.livejobsbd/
-    - /bin/cp package-lock.json /home/livejobs/landing.livejobsbd/
-    - /bin/cp vite.config.js /home/livejobs/landing.livejobsbd/
-    - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd/
-    - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd/
+    - /bin/cp -R app /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp -R bootstrap /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp -R config /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp -R database /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp -R resources /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp -R routes /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp artisan /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp composer.json /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp composer.lock /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp package.json /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp package-lock.json /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp vite.config.js /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd.com/
+    - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R public/* /home/livejobs/landing.livejobsbd.com/
