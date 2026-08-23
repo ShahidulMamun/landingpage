@@ -1,17 +1,17 @@
 deployment:
   tasks:
-    - /bin/cp -R app/* /home/livejobs/public_html/app/
-    - /bin/cp -R bootstrap/* /home/livejobs/public_html/bootstrap/
-    - /bin/cp -R config/* /home/livejobs/public_html/config/
-    - /bin/cp -R database/* /home/livejobs/public_html/database/
-    - /bin/cp -R resources/* /home/livejobs/public_html/resources/
-    - /bin/cp -R routes/* /home/livejobs/public_html/routes/
-    - /bin/cp -R public/* /home/livejobs/public_html/
-    - /bin/cp artisan /home/livejobs/public_html/
-    - /bin/cp composer.json /home/livejobs/public_html/
-    - /bin/cp composer.lock /home/livejobs/public_html/
-    - /bin/cp package.json /home/livejobs/public_html/
-    - /bin/cp package-lock.json /home/livejobs/public_html/
-    - /bin/cp vite.config.js /home/livejobs/public_html/
-    - /bin/cp postcss.config.js /home/livejobs/public_html/
-    - /bin/cp tailwind.config.js /home/livejobs/public_html/
+    - /bin/cp -R app/* /home/livejobs/landing.livejobsbd/app/
+    - /bin/cp -R bootstrap/* /home/livejobs/landing.livejobsbd/bootstrap/
+    - /bin/cp -R config/* /home/livejobs/landing.livejobsbd/config/
+    - /bin/cp -R database/* /home/livejobs/landing.livejobsbd/database/
+    - /bin/cp -R resources/* /home/livejobs/landing.livejobsbd/resources/
+    - /bin/cp -R routes/* /home/livejobs/landing.livejobsbd/routes/
+    - /bin/cp -R public/* /home/livejobs/landing.livejobsbd/
+    - /bin/cp artisan /home/livejobs/landing.livejobsbd/
+    - /bin/cp composer.json /home/livejobs/landing.livejobsbd/
+    - /bin/cp composer.lock /home/livejobs/landing.livejobsbd/
+    - /bin/cp package.json /home/livejobs/landing.livejobsbd/
+    - /bin/cp package-lock.json /home/livejobs/landing.livejobsbd/
+    - /bin/cp vite.config.js /home/livejobs/landing.livejobsbd/
+    - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd/
+    - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd/
