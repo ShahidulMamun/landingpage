@@ -1,7 +1,6 @@
 ---
 deployment:
   tasks:
-    # Laravel Application
     - /bin/cp -R app /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R bootstrap /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R config /home/livejobs/landing.livejobsbd.com/
@@ -9,26 +8,20 @@ deployment:
     - /bin/cp -R resources /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R routes /home/livejobs/landing.livejobsbd.com/
 
-    # Laravel Files
     - /bin/cp -f artisan /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f composer.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f composer.lock /home/livejobs/landing.livejobsbd.com/
 
-    # Frontend Config
     - /bin/cp -f package.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f vite.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f tailwind.config.js /home/livejobs/landing.livejobsbd.com/
 
-    # Public index
-    - /bin/cp -f public/index.php /home/livejobs/landing.livejobsbd.com/
+    # Public folder
+    - /bin/cp -R public /home/livejobs/landing.livejobsbd.com/
 
-    # Public assets
-    - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/assets
-    - /bin/cp -Rf public/assets/. /home/livejobs/landing.livejobsbd.com/assets/
-
-    # Database Migration
+    # Database migration
     - cd /home/livejobs/landing.livejobsbd.com && php artisan migrate --force
 
-    # Laravel Optimization
+    # Laravel optimization
     - cd /home/livejobs/landing.livejobsbd.com && php artisan optimize
