@@ -20,14 +20,14 @@ deployment:
     - /bin/cp -f postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f tailwind.config.js /home/livejobs/landing.livejobsbd.com/
 
-    # Public index.php
+    # Public index
     - /bin/cp -f public/index.php /home/livejobs/landing.livejobsbd.com/
 
     # Public assets
     - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/assets
-    - /bin/rsync -av --delete public/assets/ /home/livejobs/landing.livejobsbd.com/assets/
+    - /bin/cp -Rf public/assets/. /home/livejobs/landing.livejobsbd.com/assets/
 
-    # Laravel Database Migration
+    # Database Migration
     - cd /home/livejobs/landing.livejobsbd.com && php artisan migrate --force
 
     # Laravel Optimization
