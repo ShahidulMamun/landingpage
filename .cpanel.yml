@@ -24,8 +24,15 @@ deployment:
     - /bin/cp -f public/favicon.ico /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/robots.txt /home/livejobs/landing.livejobsbd.com/public/
 
+    - /bin/echo "===== CSS DEPLOY START ====="
+    - /bin/pwd
+    - /bin/ls -lah public/css
+    - /bin/ls -lah /home/livejobs/landingpage/public/css
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/css
-    - /bin/cp -R public/css /home/livejobs/landing.livejobsbd.com/public/
+    - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/public/css
+    - /bin/cp -Rf /home/livejobs/landingpage/public/css/. /home/livejobs/landing.livejobsbd.com/public/css/
+    - /bin/ls -lah /home/livejobs/landing.livejobsbd.com/public/css
+    - /bin/echo "===== CSS DEPLOY END ====="
 
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/js
     - /bin/cp -R public/js /home/livejobs/landing.livejobsbd.com/public/
