@@ -15,7 +15,7 @@
 <!-- Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 <!-- Custom -->
-<link rel="stylesheet" href="{{ asset('css/landing.page.css') }}">
+<link rel="stylesheet" href="{{ asset('css/landing.css') }}">
 </head>
 <body>
 
@@ -127,22 +127,16 @@
       <h2>যা খুঁজছেন, দ্রুত খুঁজে নিন</h2>
     </div>
     <div class="row g-4">
-      @php
-        $categories = [
-          ['name' => 'ফ্যাশন', 'img' => 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=500&auto=format&fit=crop'],
-          ['name' => 'ইলেকট্রনিক্স', 'img' => 'https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?q=80&w=500&auto=format&fit=crop'],
-          ['name' => 'হোম ও লিভিং', 'img' => 'https://images.unsplash.com/photo-1484154218962-a197022b5858?q=80&w=500&auto=format&fit=crop'],
-          ['name' => 'বিউটি', 'img' => 'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=500&auto=format&fit=crop'],
-        ];
-      @endphp
-      @foreach($categories as $cat)
+      @forelse($categories as $cat)
       <div class="col-6 col-lg-3" data-reveal data-reveal-delay="{{ $loop->index * 100 }}">
-        <a href="#" class="sk-cat-card">
-          <img src="{{ $cat['img'] }}" alt="{{ $cat['name'] }}">
-          <span>{{ $cat['name'] }}</span>
+        <a href="{{ route('landing') }}#products" class="sk-cat-card">
+          <img src="{{ $cat->image ? asset('storage/' . $cat->image) : 'https://images.unsplash.com/photo-1445205170230-053b83016050?q=80&w=500&auto=format&fit=crop' }}" alt="{{ $cat->name }}">
+          <span>{{ $cat->name }}</span>
         </a>
       </div>
-      @endforeach
+      @empty
+      <p class="text-center text-muted">এখনো কোনো ক্যাটাগরি যোগ করা হয়নি — অ্যাডমিন প্যানেল থেকে যোগ করো।</p>
+      @endforelse
     </div>
   </div>
 </section>
@@ -155,34 +149,28 @@
       <h2>এই সপ্তাহের সেরা পিকস</h2>
     </div>
     <div class="row g-4">
-      @php
-        $products = [
-          ['id' => 1, 'name' => 'ওয়্যারলেস ইয়ারবাডস', 'price' => 1499, 'old' => 2200, 'img' => 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=500&auto=format&fit=crop', 'badge' => '৩২% ছাড়', 'desc' => 'ব্লুটুথ ৫.৩, ৩০ ঘণ্টা ব্যাটারি ব্যাকআপ, IPX৫ ওয়াটার রেজিস্ট্যান্ট। ১ বছর রিপ্লেসমেন্ট ওয়ারেন্টি সহ।'],
-          ['id' => 2, 'name' => 'মিনিমাল ব্যাকপ্যাক', 'price' => 2150, 'old' => null, 'img' => 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?q=80&w=500&auto=format&fit=crop', 'badge' => 'নতুন', 'desc' => 'ওয়াটারপ্রুফ ফেব্রিক, ১৫.৬" ল্যাপটপ কমপার্টমেন্ট, USB চার্জিং পোর্ট সহ প্রিমিয়াম ফিনিশ।'],
-          ['id' => 3, 'name' => 'স্মার্ট ওয়াচ প্রো', 'price' => 3990, 'old' => 5500, 'img' => 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=500&auto=format&fit=crop', 'badge' => '২৭% ছাড়', 'desc' => 'হার্ট রেট ও SpO2 মনিটর, ৭ দিন ব্যাটারি লাইফ, ওয়াটার রেজিস্ট্যান্ট, Android/iOS সাপোর্টেড।'],
-          ['id' => 4, 'name' => 'ক্যাজুয়াল স্নিকার্স', 'price' => 2890, 'old' => null, 'img' => 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=500&auto=format&fit=crop', 'badge' => 'জনপ্রিয়', 'desc' => 'ব্রিদেবল মেশ আপার, কুশনড সোল, সব সাইজে (৩৯-৪৪) স্টক আছে।'],
-        ];
-      @endphp
-      @foreach($products as $p)
+      @forelse($products as $p)
       <div class="col-6 col-lg-3" data-reveal data-reveal-delay="{{ $loop->index * 100 }}">
         <div class="sk-product-card"
-             data-id="{{ $p['id'] }}"
-             data-name="{{ $p['name'] }}"
-             data-price="{{ $p['price'] }}"
-             data-old="{{ $p['old'] }}"
-             data-img="{{ $p['img'] }}"
-             data-desc="{{ $p['desc'] }}">
+             data-id="{{ $p->id }}"
+             data-name="{{ $p->name }}"
+             data-price="{{ $p->price }}"
+             data-old="{{ $p->old_price }}"
+             data-img="{{ $p->image ? asset('storage/' . $p->image) : '' }}"
+             data-desc="{{ $p->description }}">
           <div class="sk-product-img sk-open-details" role="button" tabindex="0">
-            <img src="{{ $p['img'] }}" alt="{{ $p['name'] }}">
-            <span class="sk-badge">{{ $p['badge'] }}</span>
+            <img src="{{ $p->image ? asset('storage/' . $p->image) : 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?q=80&w=500&auto=format&fit=crop' }}" alt="{{ $p->name }}">
+            @if($p->badge)
+              <span class="sk-badge">{{ $p->badge }}</span>
+            @endif
             <button class="sk-wishlist" onclick="event.stopPropagation()"><i class="bi bi-heart"></i></button>
           </div>
           <div class="sk-product-body">
-            <h6 class="sk-open-details" role="button" tabindex="0">{{ $p['name'] }}</h6>
+            <h6 class="sk-open-details" role="button" tabindex="0">{{ $p->name }}</h6>
             <div class="sk-product-price">
-              <span class="sk-price-new">৳{{ number_format($p['price']) }}</span>
-              @if($p['old'])
-                <span class="sk-price-old">৳{{ number_format($p['old']) }}</span>
+              <span class="sk-price-new">৳{{ number_format($p->price) }}</span>
+              @if($p->old_price)
+                <span class="sk-price-old">৳{{ number_format($p->old_price) }}</span>
               @endif
             </div>
             <div class="d-flex gap-2 mt-2">
@@ -196,7 +184,9 @@
           </div>
         </div>
       </div>
-      @endforeach
+      @empty
+      <p class="text-center text-muted">এখনো কোনো ফিচার্ড প্রোডাক্ট নেই — অ্যাডমিন প্যানেল থেকে প্রোডাক্ট যোগ করে "ফিচার্ড" টিক দাও।</p>
+      @endforelse
     </div>
     <div class="text-center mt-5" data-reveal>
       <a href="#" class="btn sk-btn-ghost btn-lg">সব প্রোডাক্ট দেখুন</a>
@@ -284,28 +274,35 @@
       <h2 class="text-white">যারা কিনেছেন, তারাই বলছেন সেরা</h2>
     </div>
     <div class="row g-4">
-      @php
-        $reviews = [
-          ['name' => 'তানভীর হাসান', 'city' => 'ঢাকা', 'text' => 'প্রোডাক্ট কোয়ালিটি একদম যেমনটা দেখানো হয়েছিল। ডেলিভারিও দ্রুত পেয়েছি।'],
-          ['name' => 'নুসরাত জাহান', 'city' => 'চট্টগ্রাম', 'text' => 'কাস্টমার সাপোর্ট খুবই হেল্পফুল, এক্সচেঞ্জ প্রসেস অনেক সহজ ছিল।'],
-          ['name' => 'রাকিব আহমেদ', 'city' => 'সিলেট', 'text' => 'দাম অনুযায়ী কোয়ালিটি সেরা। রেগুলার কাস্টমার হয়ে গেছি এখন।'],
-        ];
-      @endphp
-      @foreach($reviews as $r)
+      @forelse($reviews as $r)
       <div class="col-lg-4" data-reveal data-reveal-delay="{{ $loop->index * 100 }}">
         <div class="sk-review-card">
           <span class="sk-verified"><i class="bi bi-patch-check-fill"></i> ভেরিফাইড ক্রেতা</span>
-          <p>"{{ $r['text'] }}"</p>
+          <div class="mb-2">
+            @for($i = 1; $i <= 5; $i++)
+              <i class="bi {{ $i <= $r->rating ? 'bi-star-fill' : 'bi-star' }}" style="color:#FFC145;font-size:.85rem"></i>
+            @endfor
+          </div>
+          <p>"{{ $r->comment }}"</p>
           <div class="sk-review-author">
-            <div class="sk-avatar">{{ mb_substr($r['name'], 0, 1) }}</div>
+            <div class="sk-avatar">{{ mb_substr($r->customer_name, 0, 1) }}</div>
             <div>
-              <strong>{{ $r['name'] }}</strong>
-              <span>{{ $r['city'] }}</span>
+              <strong>{{ $r->customer_name }}</strong>
+              @if($r->city)<span>{{ $r->city }}</span>@endif
             </div>
           </div>
         </div>
       </div>
-      @endforeach
+      @empty
+      <div class="col-12 text-center">
+        <p class="text-white-50">এখনো কোনো রিভিউ অ্যাপ্রুভ করা হয়নি।</p>
+      </div>
+      @endforelse
+    </div>
+    <div class="text-center mt-5" data-reveal>
+      <a href="{{ route('reviews.create') }}" class="btn sk-btn-ghost" style="border-color:rgba(255,255,255,0.3);color:#fff">
+        <i class="bi bi-pencil-square"></i> তোমার অভিজ্ঞতা শেয়ার করো
+      </a>
     </div>
   </div>
 </section>
@@ -319,11 +316,11 @@
         <p>এক্সক্লুসিভ ডিসকাউন্ট আর নতুন প্রোডাক্ট লঞ্চের খবর সবার আগে পান।</p>
       </div>
       <div class="col-lg-5">
-      <form class="sk-newsletter-form" id="skNewsletterForm">
-        <input type="email" name="email" placeholder="আপনার ইমেইল দিন" required>
-        <button type="submit" class="btn sk-btn-primary">সাবস্ক্রাইব</button>
-      </form>
-      <p class="sk-newsletter-msg small mt-2 mb-0 d-none"></p>
+        <form class="sk-newsletter-form" id="skNewsletterForm">
+          <input type="email" name="email" placeholder="আপনার ইমেইল দিন" required>
+          <button type="submit" class="btn sk-btn-primary">সাবস্ক্রাইব</button>
+        </form>
+        <p class="sk-newsletter-msg small mt-2 mb-0 d-none"></p>
       </div>
     </div>
   </div>
@@ -355,7 +352,7 @@
         <ul>
           <li><a href="#">রিটার্ন পলিসি</a></li>
           <li><a href="#">শিপিং তথ্য</a></li>
-          <li><a href="{{route('faq')}}">FAQ</a></li>
+          <li><a href="#">FAQ</a></li>
         </ul>
       </div>
       <div class="col-lg-4">
@@ -468,6 +465,6 @@
   window.SK_ORDER_URL = "{{ route('order.store') }}";
   window.SK_NEWSLETTER_URL = "{{ route('newsletter.subscribe') }}";
 </script>
-<script src="{{ asset('js/landing.page.js') }}"></script>
+<script src="{{ asset('js/landing.js') }}"></script>
 </body>
 </html>
