@@ -6,9 +6,9 @@
   <h4 class="m-0">রিভিউ ({{ $counts['all'] }})</h4>
 </div>
 
-@if(session('status'))
+{{-- @if(session('status'))
   <div class="alert alert-success">{{ session('status') }}</div>
-@endif
+@endif --}}
 
 <div class="order-tabs mb-3">
   <a href="{{ route('admin.reviews.index') }}" class="order-tab {{ !request('status') ? 'active' : '' }}">
@@ -88,8 +88,11 @@
     background:#fff; border-radius:100px; padding:.45rem 1rem;
     font-size:.85rem; color:#1A1A2E; border:1px solid rgba(0,0,0,0.08);
   }
+  .order-tabs a{
+    text-decoration: none;
+  }
   .order-tab span{ color:#6c757d; margin-left:.3rem; }
-  .order-tab.active{ background:#0F5257; color:#fff; border-color:#0F5257; }
+  .order-tab.active{ background:#E85535; color:#fff; border-color:#E85535; }
   .order-tab.active span{ color:rgba(255,255,255,0.75); }
 </style>
 @endsection
