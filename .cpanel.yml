@@ -15,3 +15,5 @@ deployment:
     - /bin/cp postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp tailwind.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R public/* /home/livejobs/landing.livejobsbd.com/
+    - cd /home/livejobs/landing.livejobsbd.com && php artisan migrate --force
+    - cd /home/livejobs/landing.livejobsbd.com && php artisan optimize
