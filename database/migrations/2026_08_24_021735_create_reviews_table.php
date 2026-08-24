@@ -20,8 +20,7 @@ return new class extends Migration
             $table->text('comment');
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->timestamps();
- 
-            $table->index('status')
+            $table->index('status');
         });
     }
 
