@@ -68,6 +68,9 @@
   <a href="{{ route('admin.subscribers.index') }}" class="{{ request()->routeIs('admin.subscribers.*') ? 'active' : '' }}">
     <i class="bi bi-envelope"></i> সাবস্ক্রাইবার
   </a>
+    <a href="{{ route('admin.reviews.index') }}" class="{{ request()->routeIs('admin.reviews.*') ? 'active' : '' }}">
+    <i class="bi bi-star"></i> রিভিউ
+  </a>
   <a href="{{ route('landing') }}" target="_blank">
     <i class="bi bi-box-arrow-up-right"></i> সাইট দেখুন
   </a>
