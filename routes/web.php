@@ -1,10 +1,13 @@
-<?php
+<?php 
 
+// == Admin Routes ==
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
+use App\Http\Controllers\ReviewController;
+// ==User Routes ==
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -18,6 +21,10 @@ use App\Http\Controllers\Admin\SubscriberController;
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+// == Review Route ==
+Route::get('/reviews', [ReviewController::class, 'create'])->name('reviews.create');
+Route::post('/reviews', [ReviewController::class, 'store'])->name('reviews.store');
 
 // == Subscribe and Unsubscribe Route ==
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'store'])->name('newsletter.subscribe');
