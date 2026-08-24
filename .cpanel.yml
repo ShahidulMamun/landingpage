@@ -26,13 +26,13 @@ deployment:
     - /bin/cp -f public/favicon.ico /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/robots.txt /home/livejobs/landing.livejobsbd.com/public/
 
-    # CSS
-    - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/public/css
-    - /bin/cp -Rf public/css/. /home/livejobs/landing.livejobsbd.com/public/css/
+    # CSS - Sync exactly with repository
+    - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/css
+    - /bin/cp -R public/css /home/livejobs/landing.livejobsbd.com/public/
 
-    # JS
-    - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/public/js
-    - /bin/cp -Rf public/js/. /home/livejobs/landing.livejobsbd.com/public/js/
+    # JS - Sync exactly with repository
+    - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/js
+    - /bin/cp -R public/js /home/livejobs/landing.livejobsbd.com/public/
 
     # Database Migration
     - cd /home/livejobs/landing.livejobsbd.com && php artisan migrate --force
