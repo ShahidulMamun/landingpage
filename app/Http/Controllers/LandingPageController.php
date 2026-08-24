@@ -10,6 +10,6 @@ class LandingPageController extends Controller
     public function index(){
         
         $categories = Category::where('is_active',true)->orderBy('sort_order','ASC')->get();
-        return view('landing',compact('categpries'));
+        return view('landing',compact('categories'));
     }
 }
