@@ -20,17 +20,17 @@ deployment:
     - /bin/cp -f postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f tailwind.config.js /home/livejobs/landing.livejobsbd.com/
 
-    # Public index and files
+    # Public Files
     - /bin/cp -f public/index.php /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/.htaccess /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/favicon.ico /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/robots.txt /home/livejobs/landing.livejobsbd.com/public/
 
-    # CSS - Sync exactly with repository
+    # CSS - Remove old files and copy current repository files
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/css
     - /bin/cp -R public/css /home/livejobs/landing.livejobsbd.com/public/
 
-    # JS - Sync exactly with repository
+    # JS - Remove old files and copy current repository files
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/js
     - /bin/cp -R public/js /home/livejobs/landing.livejobsbd.com/public/
 
