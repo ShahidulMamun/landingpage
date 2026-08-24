@@ -1,8 +1,7 @@
 ---
 deployment:
   tasks:
-    - /bin/touch /home/livejobs/landing.livejobsbd.com/CPANEL_TEST_12345
-
+    # Laravel Application
     - /bin/cp -R app /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R bootstrap /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R config /home/livejobs/landing.livejobsbd.com/
@@ -10,32 +9,33 @@ deployment:
     - /bin/cp -R resources /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -R routes /home/livejobs/landing.livejobsbd.com/
 
+    # Laravel Files
     - /bin/cp -f artisan /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f composer.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f composer.lock /home/livejobs/landing.livejobsbd.com/
 
+    # Frontend Config
     - /bin/cp -f package.json /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f vite.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f postcss.config.js /home/livejobs/landing.livejobsbd.com/
     - /bin/cp -f tailwind.config.js /home/livejobs/landing.livejobsbd.com/
 
+    # Public Files
     - /bin/cp -f public/index.php /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/.htaccess /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/favicon.ico /home/livejobs/landing.livejobsbd.com/public/
     - /bin/cp -f public/robots.txt /home/livejobs/landing.livejobsbd.com/public/
 
-    - /bin/echo "===== CSS DEPLOY START ====="
-    - /bin/pwd
-    - /bin/ls -lah public/css
-    - /bin/ls -lah /home/livejobs/landingpage/public/css
+      # CSS
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/css
-    - /bin/mkdir -p /home/livejobs/landing.livejobsbd.com/public/css
-    - /bin/cp -Rf /home/livejobs/landingpage/public/css/. /home/livejobs/landing.livejobsbd.com/public/css/
-    - /bin/ls -lah /home/livejobs/landing.livejobsbd.com/public/css
-    - /bin/echo "===== CSS DEPLOY END ====="
+    - /bin/cp -R /home/livejobs/repositories/landingpage/public/css /home/livejobs/landing.livejobsbd.com/public/
 
+    # JS
     - /bin/rm -rf /home/livejobs/landing.livejobsbd.com/public/js
-    - /bin/cp -R public/js /home/livejobs/landing.livejobsbd.com/public/
+    - /bin/cp -R /home/livejobs/repositories/landingpage/public/js /home/livejobs/landing.livejobsbd.com/public/
 
+    # Database Migration
     - cd /home/livejobs/landing.livejobsbd.com && php artisan migrate --force
+
+    # Laravel Optimization
     - cd /home/livejobs/landing.livejobsbd.com && php artisan optimize
