@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\OrderManageController;
 use App\Http\Controllers\Admin\FaqManageController  as AdminFaqController;
 use App\Http\Controllers\Admin\SubscriberController;
 use App\Http\Controllers\Admin\ReviewManageController;
+use App\Http\Controllers\Admin\SettingsController;
 
 //== Guest Route ==
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
@@ -46,6 +47,8 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::get('subscribers/export', [SubscriberController::class, 'export'])->name('subscribers.export');
     Route::resource('subscribers', SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('reviews', ReviewManageController::class)->only(['index', 'update', 'destroy']);
+    Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update')
 });
 
 //== Logout Route == 
