@@ -48,7 +48,7 @@ Route::middleware('admin.auth')->prefix('admin')->name('admin.')->group(function
     Route::resource('subscribers', SubscriberController::class)->only(['index', 'destroy']);
     Route::resource('reviews', ReviewManageController::class)->only(['index', 'update', 'destroy']);
     Route::get('settings', [SettingsController::class, 'edit'])->name('settings.edit');
-    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update')
+    Route::put('settings', [SettingsController::class, 'update'])->name('settings.update');
 });
 
 //== Logout Route == 
