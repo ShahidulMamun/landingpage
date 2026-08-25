@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (Schema::hasTable('settings')) {
-        View::share('siteSettings', Setting::current());
-    }
+         View::share('siteSettings', Setting::current());
+        }
     }
 }

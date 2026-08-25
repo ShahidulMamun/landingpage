@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ShopKori — একটাই ঠিকানা, সব কেনাকাটার</title>
-<meta name="description" content="সেরা দামে অথেনটিক প্রোডাক্ট, ক্যাশ অন ডেলিভারি সহ সারা বাংলাদেশে ফাস্ট ডেলিভারি।">
+<title>{{ $siteSettings->site_name ?? 'ShopKori' }} @if($siteSettings->tagline ?? false) — {{ $siteSettings->tagline }} @endif</title>
+<meta name="description" content="{{ $siteSettings->meta_description ?? 'সেরা দামে অথেনটিক প্রোডাক্ট, ক্যাশ অন ডেলিভারি সহ সারা বাংলাদেশে ফাস্ট ডেলিভারি।' }}">
+@if($siteSettings->favicon ?? false)
+<link rel="icon" href="{{ asset('storage/' . $siteSettings->favicon) }}">
+@endif
 <meta name="csrf-token" content="{{ csrf_token() }}">
 
 <!-- Bootstrap 5 -->
@@ -22,7 +25,13 @@
 <!-- ===== NAVBAR ===== -->
 <nav class="navbar navbar-expand-lg sk-navbar sticky-top">
   <div class="container">
-    <a class="navbar-brand sk-logo" href="{{ route('landing') }}">Shop<span>Kori</span></a>
+    @if($siteSettings->logo ?? false)
+      <a class="navbar-brand" href="{{ route('landing') }}">
+        <img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="36">
+      </a>
+    @else
+      <a class="navbar-brand sk-logo" href="{{ route('landing') }}">Shop<span>Kori</span></a>
+    @endif
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#skNav">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -330,14 +339,21 @@
 <footer class="sk-footer">
   <div class="container">
     <div class="row g-4">
-      <div class="col-lg-4">
-        <a class="sk-logo sk-logo--footer" href="{{ route('landing') }}">Shop<span>Kori</span></a>
-        <p>বাংলাদেশের সবচেয়ে বিশ্বস্ত অনলাইন শপিং ডেস্টিনেশন।</p>
+      <div class="col-lg-3">
+        @if($siteSettings->logo ?? false)
+          <a href="{{ route('landing') }}"><img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="32"></a>
+        @else
+          <a class="sk-logo sk-logo--footer" href="{{ route('landing') }}">Shop<span>Kori</span></a>
+        @endif
+        <p>{{ $siteSettings->footer_about ?? 'বাংলাদেশের সবচেয়ে বিশ্বস্ত অনলাইন শপিং ডেস্টিনেশন।' }}</p>
+        @if(($siteSettings->facebook_url ?? false) || ($siteSettings->instagram_url ?? false) || ($siteSettings->youtube_url ?? false) || ($siteSettings->tiktok_url ?? false))
         <div class="sk-social">
-          <a href="#"><i class="bi bi-facebook"></i></a>
-          <a href="#"><i class="bi bi-instagram"></i></a>
-          <a href="#"><i class="bi bi-youtube"></i></a>
+          @if($siteSettings->facebook_url ?? false)<a href="{{ $siteSettings->facebook_url }}" target="_blank"><i class="bi bi-facebook"></i></a>@endif
+          @if($siteSettings->instagram_url ?? false)<a href="{{ $siteSettings->instagram_url }}" target="_blank"><i class="bi bi-instagram"></i></a>@endif
+          @if($siteSettings->youtube_url ?? false)<a href="{{ $siteSettings->youtube_url }}" target="_blank"><i class="bi bi-youtube"></i></a>@endif
+          @if($siteSettings->tiktok_url ?? false)<a href="{{ $siteSettings->tiktok_url }}" target="_blank"><i class="bi bi-tiktok"></i></a>@endif
         </div>
+        @endif
       </div>
       <div class="col-6 col-lg-2">
         <h6>কোম্পানি</h6>
@@ -352,10 +368,20 @@
         <ul>
           <li><a href="#">রিটার্ন পলিসি</a></li>
           <li><a href="#">শিপিং তথ্য</a></li>
-          <li><a href="#">FAQ</a></li>
+          <li><a href="{{ route('faq') }}">FAQ</a></li>
         </ul>
       </div>
-      <div class="col-lg-4">
+      @if(($siteSettings->address ?? false) || ($siteSettings->phone ?? false) || ($siteSettings->email ?? false))
+      <div class="col-6 col-lg-2">
+        <h6>যোগাযোগ</h6>
+        <ul>
+          @if($siteSettings->address ?? false)<li><i class="bi bi-geo-alt"></i> {{ $siteSettings->address }}</li>@endif
+          @if($siteSettings->phone ?? false)<li><a href="tel:{{ $siteSettings->phone }}"><i class="bi bi-telephone"></i> {{ $siteSettings->phone }}</a></li>@endif
+          @if($siteSettings->email ?? false)<li><a href="mailto:{{ $siteSettings->email }}"><i class="bi bi-envelope"></i> {{ $siteSettings->email }}</a></li>@endif
+        </ul>
+      </div>
+      @endif
+      <div class="col-lg-3">
         <h6>পেমেন্ট মেথড</h6>
         <div class="sk-payment-icons">
           <span>bKash</span><span>Nagad</span><span>Rocket</span><span>Visa</span><span>COD</span>
@@ -363,7 +389,7 @@
       </div>
     </div>
     <hr>
-    <p class="sk-copyright">© {{ date('Y') }} ShopKori. সর্বস্বত্ব সংরক্ষিত।</p>
+    <p class="sk-copyright">© {{ date('Y') }} {{ $siteSettings->site_name ?? 'ShopKori' }}. সর্বস্বত্ব সংরক্ষিত।</p>
   </div>
 </footer>
 
@@ -456,7 +482,6 @@
 
     </div>
   </div>
-  
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
