@@ -27,7 +27,7 @@
   <div class="container">
     @if($siteSettings->logo ?? false)
       <a class="navbar-brand" href="{{ route('landing') }}">
-        <img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="36">
+        <img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="70">
       </a>
     @else
       <a class="navbar-brand sk-logo" href="{{ route('landing') }}">Shop<span>Kori</span></a>
