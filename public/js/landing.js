@@ -203,10 +203,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         msgEl.classList.remove(
                             "d-none",
                             "text-danger",
-                            "text-success",
+                            "text-white",
                         );
                         if (ok) {
-                            msgEl.classList.add("text-success");
+                            msgEl.classList.add("text-white");
                             msgEl.textContent =
                                 data.message || "সাবস্ক্রাইব হয়েছে!";
                             newsletterForm.reset();
@@ -223,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .catch(() => {
                     if (msgEl) {
-                        msgEl.classList.remove("d-none", "text-success");
+                        msgEl.classList.remove("d-none", "text-white");
                         msgEl.classList.add("text-danger");
                         msgEl.textContent =
                             "নেটওয়ার্ক সমস্যা হয়েছে, আবার চেষ্টা করো।";
