@@ -1,13 +1,14 @@
 <?php 
 
-// == Admin Routes ==
+// == User Routes ==
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\ReviewController;
-// ==User Routes ==
+use App\Http\Controllers\CartController;
+// == Admin Routes ==
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -22,6 +23,13 @@ use App\Http\Controllers\Admin\SettingsController;
 Route::get('/', [LandingPageController::class, 'index'])->name('landing');
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+// ===== Cart  =====
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
 // == Review Route ==
 Route::get('/reviews', [ReviewController::class, 'create'])->name('reviews.create');

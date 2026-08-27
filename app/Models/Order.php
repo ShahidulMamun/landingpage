@@ -9,7 +9,7 @@ class Order extends Model
     const STATUSES = ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'];
     const PAYMENT_STATUSES = ['unpaid', 'paid', 'refunded'];
     
-    protected $fillable = [
+ protected $fillable = [
         'order_group_id',
         'product_id',
         'product_name',
@@ -19,6 +19,8 @@ class Order extends Model
         'customer_name',
         'phone',
         'address',
+        'delivery_area',
+        'delivery_charge',
         'payment_method',
         'payment_status',
         'status',
