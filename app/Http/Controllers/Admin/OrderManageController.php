@@ -10,7 +10,7 @@ use App\Models\Order;
 
 class OrderManageController extends Controller
 {
-      public function index(Request $request)
+    public function index(Request $request)
     {
         $query = Order::query()->latest();
  
@@ -47,7 +47,13 @@ class OrderManageController extends Controller
  
     public function show(Order $order)
     {
-        return view('admin.orders.show', compact('order'));
+        $groupOrders = $order->order_group_id
+            ? Order::where('order_group_id', $order->order_group_id)->orderBy('id')->get()
+            : collect([$order]);
+ 
+        $groupTotal = $groupOrders->sum('total_price');
+ 
+        return view('admin.orders.show', compact('order', 'groupOrders', 'groupTotal'));
     }
  
     public function update(Request $request, Order $order)
@@ -58,6 +64,10 @@ class OrderManageController extends Controller
         ]);
  
         $order->update($validated);
+        
+        if ($request->boolean('apply_to_group') && $order->order_group_id) {
+            $order->groupSiblings()->update($validated);
+        }
  
         return back()->with('status', 'অর্ডার #' . $order->id . ' আপডেট হয়েছে');
     }
