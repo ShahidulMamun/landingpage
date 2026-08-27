@@ -74,7 +74,14 @@
         @forelse($orders as $order)
         <tr>
           <td>#{{ $order->id }}</td>
-          <td>{{ $order->product_name }}</td>
+          <td>
+            {{ $order->product_name }}
+            @if($order->order_group_id)
+              <span class="badge bg-light text-dark border" title="একই চেকআউটের অংশ">
+                <i class="bi bi-link-45deg"></i> গ্রুপড
+              </span>
+            @endif
+          </td>
           <td>{{ $order->customer_name }}</td>
           <td>{{ $order->phone }}</td>
           <td>{{ $order->quantity }}</td>
@@ -121,11 +128,8 @@
     background:#fff; border-radius:100px; padding:.45rem 1rem;
     font-size:.85rem; color:#1A1A2E; border:1px solid rgba(0,0,0,0.08);
   }
-  .order-tabs a{
-    text-decoration: none !important;
-  }
   .order-tab span{ color:#6c757d; margin-left:.3rem; }
-  .order-tab.active{ background:#E85535; color:#fff; border-color:#E85535; }
+  .order-tab.active{ background:#0F5257; color:#fff; border-color:#0F5257; }
   .order-tab.active span{ color:rgba(255,255,255,0.75); }
 </style>
 @endsection
