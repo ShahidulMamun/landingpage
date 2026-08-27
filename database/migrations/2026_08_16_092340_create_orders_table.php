@@ -25,6 +25,8 @@ return new class extends Migration
             $table->enum('payment_method', ['cod', 'bkash'])->default('cod');
             $table->enum('payment_status', ['unpaid', 'paid', 'refunded'])->default('unpaid');
             $table->enum('status', ['pending', 'confirmed', 'shipped', 'delivered', 'cancelled'])->default('pending');
+            $table->enum('delivery_area', ['dhaka', 'outside_dhaka'])->nullable()->after('address');
+            $table->unsignedInteger('delivery_charge')->default(0)->after('delivery_area');
             $table->timestamps();
             $table->index('phone');
             $table->index('status');
@@ -38,7 +40,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
-        $table->string('order_group_id', 36)->nullable()->after('id');
-        $table->index('order_group_id');
+      
     }
 };
