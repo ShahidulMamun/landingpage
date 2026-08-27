@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
+            $table->string('order_group_id', 36)->nullable();
             $table->unsignedBigInteger('product_id');
             $table->string('product_name');
             $table->unsignedInteger('unit_price');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->timestamps();
             $table->index('phone');
             $table->index('status');
+            $table->index('order_group_id');
         });
     }
 
@@ -36,5 +38,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('orders');
+        $table->string('order_group_id', 36)->nullable()->after('id');
+        $table->index('order_group_id');
     }
 };
