@@ -27,7 +27,7 @@
   <div class="container">
     @if($siteSettings->logo ?? false)
       <a class="navbar-brand" href="{{ route('landing') }}">
-        <img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="70">
+        <img src="{{ asset('storage/' . $siteSettings->logo) }}" alt="{{ $siteSettings->site_name }}" height="36">
       </a>
     @else
       <a class="navbar-brand sk-logo" href="{{ route('landing') }}">Shop<span>Kori</span></a>
@@ -45,9 +45,9 @@
       </ul>
       <div class="d-flex align-items-center gap-3 mt-3 mt-lg-0">
         <a href="#" class="sk-icon-btn"><i class="bi bi-search"></i></a>
-        <a href="#" class="sk-icon-btn position-relative">
+        <a href="#" class="sk-icon-btn position-relative" id="skCartBtn" data-bs-toggle="offcanvas" data-bs-target="#skCartOffcanvas">
           <i class="bi bi-bag"></i>
-          <span class="sk-cart-count">3</span>
+          <span class="sk-cart-count d-none">0</span>
         </a>
         <a href="#products" class="btn sk-btn-primary d-none d-lg-inline-flex">শপিং শুরু করুন</a>
       </div>
@@ -182,13 +182,18 @@
                 <span class="sk-price-old">৳{{ number_format($p->old_price) }}</span>
               @endif
             </div>
-            <div class="d-flex gap-2 mt-2">
-              <button class="btn sk-btn-cart sk-open-details flex-fill">
+            <div class="d-flex flex-column gap-2 mt-2">
+              <button class="btn sk-btn-cart sk-open-details w-100">
                 <i class="bi bi-eye"></i> বিস্তারিত
               </button>
-              <button class="btn sk-btn-primary sk-open-order flex-fill">
-                <i class="bi bi-lightning-charge-fill"></i> অর্ডার করুন
-              </button>
+              <div class="d-flex gap-2">
+                <button class="btn sk-btn-ghost sk-add-to-cart flex-fill" data-id="{{ $p->id }}">
+                  <i class="bi bi-bag-plus"></i> কার্টে যোগ
+                </button>
+                <button class="btn sk-btn-primary sk-open-order flex-fill">
+                  <i class="bi bi-lightning-charge-fill"></i> অর্ডার
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -393,6 +398,106 @@
   </div>
 </footer>
 
+<!-- ===== CART OFFCANVAS ===== -->
+<div class="offcanvas offcanvas-end sk-cart-offcanvas" tabindex="-1" id="skCartOffcanvas">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title"><i class="bi bi-bag"></i> তোমার কার্ট</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+  </div>
+  <div class="offcanvas-body d-flex flex-column">
+
+    <!-- Cart items view -->
+    <div id="cartItemsView" class="flex-grow-1 d-flex flex-column">
+      <div id="cartEmptyState" class="text-center text-muted py-5 d-none">
+        <i class="bi bi-bag-x" style="font-size:2.5rem"></i>
+        <p class="mt-2">তোমার কার্ট খালি</p>
+        <a href="#products" class="btn sk-btn-primary" data-bs-dismiss="offcanvas">শপিং শুরু করো</a>
+      </div>
+      <div id="cartItemsList"></div>
+    </div>
+
+    <!-- Cart footer (subtotal + checkout button) -->
+    <div id="cartFooter" class="sk-cart-footer d-none">
+      <div class="d-flex justify-content-between mb-3">
+        <span>সাবটোটাল</span>
+        <strong id="cartSubtotal">৳0</strong>
+      </div>
+      <button type="button" class="btn sk-btn-primary w-100" id="cartCheckoutBtn">
+        <i class="bi bi-arrow-right-circle"></i> চেকআউট করো
+      </button>
+    </div>
+
+    <!-- Checkout form (shown after clicking Checkout) -->
+    <form id="cartCheckoutForm" class="sk-order-form d-none px-0">
+      <button type="button" class="btn btn-sm btn-link ps-0 mb-2" id="cartBackToItems">
+        <i class="bi bi-arrow-left"></i> কার্টে ফিরে যাও
+      </button>
+
+      <div class="mb-3">
+        <label class="form-label">পুরো নাম *</label>
+        <input type="text" name="customer_name" class="form-control" required placeholder="আপনার নাম লিখুন">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">মোবাইল নম্বর *</label>
+        <input type="tel" name="phone" class="form-control" required pattern="^01[3-9][0-9]{8}$" placeholder="01XXXXXXXXX">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">সম্পূর্ণ ঠিকানা *</label>
+        <textarea name="address" class="form-control" rows="2" required placeholder="বাসা/রোড, থানা, জেলা"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">ডেলিভারি এরিয়া *</label>
+        <div class="sk-payment-options">
+          <label class="sk-payment-radio">
+            <input type="radio" name="delivery_area" value="dhaka" data-charge="80" checked>
+            <span><i class="bi bi-geo-alt"></i> ঢাকার ভিতরে (৳80)</span>
+          </label>
+          <label class="sk-payment-radio">
+            <input type="radio" name="delivery_area" value="outside_dhaka" data-charge="120">
+            <span><i class="bi bi-geo-alt"></i> ঢাকার বাইরে (৳120)</span>
+          </label>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">পেমেন্ট মেথড</label>
+        <div class="sk-payment-options">
+          <label class="sk-payment-radio">
+            <input type="radio" name="payment_method" value="cod" checked>
+            <span><i class="bi bi-cash-coin"></i> ক্যাশ অন ডেলিভারি</span>
+          </label>
+          <label class="sk-payment-radio">
+            <input type="radio" name="payment_method" value="bkash">
+            <span><i class="bi bi-wallet2"></i> bKash অ্যাডভান্স</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="cart-checkout-error alert alert-danger py-2 d-none"></div>
+
+      <div class="sk-order-total">
+        <span>সর্বমোট</span>
+        <strong id="cartGrandTotal">৳0</strong>
+      </div>
+
+      <button type="submit" class="btn sk-btn-primary w-100 btn-lg mt-3">
+        <span class="cart-checkout-btn-text"><i class="bi bi-check2-circle"></i> অর্ডার কনফার্ম করুন</span>
+        <span class="cart-checkout-btn-spinner d-none">
+          <span class="spinner-border spinner-border-sm"></span> প্রসেসিং...
+        </span>
+      </button>
+    </form>
+
+    <!-- Success state -->
+    <div id="cartCheckoutSuccess" class="text-center py-5 d-none">
+      <i class="bi bi-check-circle-fill" style="font-size:3rem;color:var(--sk-teal)"></i>
+      <h5 class="mt-3">অর্ডার সফলভাবে সাবমিট হয়েছে!</h5>
+      <p class="text-muted">আমাদের টিম শীঘ্রই কল করে অর্ডার নিশ্চিত করবে।</p>
+      <button type="button" class="btn sk-btn-primary" data-bs-dismiss="offcanvas">ঠিক আছে</button>
+    </div>
+
+  </div>
+</div>
+
 <!-- ===== PRODUCT DETAILS + QUICK ORDER MODAL ===== -->
 <div class="modal fade" id="orderModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -490,6 +595,11 @@
   // তাই route URL টা এখান থেকে global variable এ পাস করা হচ্ছে
   window.SK_ORDER_URL = "{{ route('order.store') }}";
   window.SK_NEWSLETTER_URL = "{{ route('newsletter.subscribe') }}";
+  window.SK_CART_ADD_URL = "{{ route('cart.add') }}";
+  window.SK_CART_UPDATE_URL = "{{ route('cart.update') }}";
+  window.SK_CART_REMOVE_URL = "{{ route('cart.remove') }}";
+  window.SK_CART_INDEX_URL = "{{ route('cart.index') }}";
+  window.SK_CART_CHECKOUT_URL = "{{ route('cart.checkout') }}";
 </script>
 <script src="{{ asset('js/landing.js') }}"></script>
 </body>
