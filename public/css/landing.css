@@ -4,8 +4,8 @@
    Palette: deep teal, coral, gold, blush-ivory, charcoal
    ========================================================================== */
 :root {
-    --sk-teal: #e85535;
-    --sk-teal-dark: #e85535;
+    --sk-teal: #0f5257;
+    --sk-teal-dark: #0a3a3e;
     --sk-coral: #ff6b4a;
     --sk-coral-dark: #e85535;
     --sk-gold: #ffc145;
@@ -307,7 +307,7 @@ a {
 }
 .sk-trustbar i {
     font-size: 1.6rem;
-    color: #ffff;
+    color: var(--sk-gold);
 }
 .sk-trustbar p {
     margin: 0.5rem 0 0;
@@ -764,6 +764,80 @@ input:focus-visible {
 .sk-order-success i {
     font-size: 3.5rem;
     color: var(--sk-teal);
+}
+
+/* ---------- Cart offcanvas ---------- */
+.sk-cart-offcanvas {
+    width: 420px;
+    max-width: 100%;
+}
+.sk-cart-item {
+    display: flex;
+    gap: 0.9rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(15, 82, 87, 0.1);
+}
+.sk-cart-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+.sk-cart-item-info {
+    flex: 1;
+}
+.sk-cart-item-info h6 {
+    font-weight: 600;
+    font-size: 0.92rem;
+    margin-bottom: 0.3rem;
+}
+.sk-cart-item-price {
+    font-family: var(--font-mono);
+    color: var(--sk-coral);
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+.sk-cart-item-remove {
+    background: none;
+    border: none;
+    color: var(--sk-gray);
+    font-size: 1rem;
+}
+.sk-cart-item-remove:hover {
+    color: var(--sk-coral);
+}
+.sk-cart-qty-stepper {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--sk-ivory);
+    border-radius: 100px;
+    padding: 0.2rem 0.6rem;
+    margin-top: 0.4rem;
+}
+.sk-cart-qty-stepper button {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: none;
+    background: var(--sk-teal);
+    color: #fff;
+    font-size: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sk-cart-qty-stepper span {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    min-width: 14px;
+    text-align: center;
+}
+.sk-cart-footer {
+    border-top: 1px solid rgba(15, 82, 87, 0.1);
+    padding-top: 1rem;
+    margin-top: auto;
 }
 
 /* ---------- Mobile responsive tweaks ---------- */
